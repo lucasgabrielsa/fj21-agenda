@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.caelum.jdbc.ConnectionFactory;
 import br.com.caelum.modelo.Contato;
 
 public class ContatoDAO {
 	
 	private Connection connection;
 	
-	public ContatoDAO() {
-		this.connection = new ConnectionFactory().getConnection();
+	public ContatoDAO(Connection connection) {
+		this.connection = connection;
+	}
+	
+	public ContatoDAO() throws Exception {
+		
 	}
 	
 	public void adiciona(Contato contato) {

@@ -8,11 +8,12 @@ public class ConnectionFactory {
 	
 	private final String STRING_CONEXAO = "jdbc:mysql://localhost/fj21";
 	private final String USER = "root";
-	private final String PASS = "1234";
+	private final String PASS = "201398";
 
 	
-	public Connection getConnection() {
+	public Connection getConnection() throws Exception {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(STRING_CONEXAO, USER, PASS);
 		} catch(SQLException e) {
 			throw new RuntimeException(e);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/contador")
 public class ContadorServlet extends HttpServlet {
 	
-	private int contador = 0; //variavel de instância
+	private int contador = 0; //variavel de instancia
 	
 	@Override
 	public void init() throws ServletException {
@@ -30,10 +30,9 @@ public class ContadorServlet extends HttpServlet {
         // escreve o texto
         out.println("<html>");
         out.println("<body>");
-        out.println("Contador agora é igual: " + contador);
+        out.println("Contador agora e igual: " + contador);
         out.println("</body>");
-        out.println("</html>");
-        
+        out.println("</html>");   
        
 		
 	}

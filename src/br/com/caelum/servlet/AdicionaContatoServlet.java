@@ -2,10 +2,12 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,9 @@ public class AdicionaContatoServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		Connection conexao = (Connection) req.getAttribute("connection");
+		ContatoDAO dao = new ContatoDAO(conexao);
 
 		PrintWriter out = res.getWriter();
 
@@ -39,14 +44,22 @@ public class AdicionaContatoServlet extends HttpServlet {
 			return;
 		}
 
-		new ContatoDAO().adiciona(contato);
+		try {
+			dao.adiciona(contato);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/contato-adicionado.jsp");
+		rd.forward(req, res);
 
-		// imprime o nome do contato que foi adicionado
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Contato " + contato.getNome() + " adicionado com sucesso");
-		out.println("</body>");
-		out.println("</html>");
+//		// imprime o nome do contato que foi adicionado
+//		out.println("<html>");
+//		out.println("<body>");
+//		out.println("Contato " + contato.getNome() + " adicionado com sucesso");
+//		out.println("</body>");
+//		out.println("</html>");
 
 	}
 
